@@ -14,10 +14,12 @@ db.sqlite3-journal
 .env
 .venv
 env/
-venv/
+venv39/
 ENV/
 env.bak/
 venv.bak/
 
 # VS Code
 .vscode/
+
+.git/

@@ -1,0 +1,23 @@
+{% load make_menu %}
+{% if to_draw %}
+
+      <ul>
+        {% if menu.name == selected_name %}
+          <li ><strong><a href="{% url 'select' url=menu.url selected=menu.name %}">{{ menu.name }}</a></strong></li>
+          {% change_context attr='before_selected' new_val=False %}
+        {% else %}
+        <li><a href="{% url 'select' url=menu.url selected=menu.name %}">{{ menu.name }}</a></li>
+        {% endif %}
+        {% if before_selected %}
+          {% for child in menu.children.all %}
+            {% make_menu child %}
+          {% endfor %}
+        {% else %}
+          <ul>
+            {% for child in menu.children.all %}
+              <li><a href="{% url 'select' url=child.url selected=child.name %}">{{ child.name }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </ul>
+{% endif %}
